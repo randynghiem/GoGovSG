@@ -1,0 +1,55 @@
+[
+  {
+    "database": "postgres",
+    "index": "directory",
+    "settings": {
+      "analysis": {
+        "analyzer": {
+          "ngram_analyzer": {
+            "filter": [
+              "lowercase"
+            ],
+            "type": "custom",
+            "tokenizer": {
+              "ngram_tokenizer": {
+                "token_chars": [
+                  "letter",
+                  "digit",
+                  "punctuation",
+                  "symbol"
+                ],
+                "min_gram": "9",
+                "type": "nGram",
+                "max_gram": "10"
+              }
+            }
+          }
+        }
+      }
+    },
+    "nodes" :[
+      {
+        "table": "users",
+        "columns": [
+          "id",
+          "email"
+        ],
+        "children": [
+          {
+            "table": "urls",
+            "columns": [
+              "shortUrl",
+              "state",
+              "isFile",
+              "longUrl"
+            ],
+            "relationship": {
+              "variant": "object",
+              "type": "one_to_many"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
